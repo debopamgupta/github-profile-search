@@ -1,3 +1,9 @@
+# Github Profile Search
+
+Idea - https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/GitHub-Profiles.md
+
+An example - https://github.com/GabrielNBDS/GitHub-Profiles
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
