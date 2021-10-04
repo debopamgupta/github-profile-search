@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Input, Button, Card, Text, Spacer, User } from "@geist-ui/react";
 import "./App.css";
 
 import { getUserInfo, getUserRepos } from "./utils/User";
@@ -22,60 +22,70 @@ function App() {
     // USER PROFILE INFORMATION
 
     const userInformation = await getUserInfo(inputVal);
-    setUser(userInformation);
+    if (userInformation && userInformation.login) {
+      // VALID USER FOUND
+      // USER PROFILE INFORMATION
+      setUser(userInformation);
 
-    // USER'S REPOSITORY INFORMATION
+      // USER'S REPOSITORY INFORMATION
+      const userRepoInformation = await getUserRepos(inputVal);
 
-    const userRepoInformation = await getUserRepos(inputVal);
+      userRepoInformation.sort((a, b) => {
+        if (a.created_at < b.created_at) {
+          return 1;
+        }
+        if (a.created_at > b.created_at) {
+          return -1;
+        }
+        return 0;
+      });
 
-    userRepoInformation.sort((a, b) => {
-      if (a.created_at < b.created_at) {
-        return 1;
-      }
-      if (a.created_at > b.created_at) {
-        return -1;
-      }
-      return 0;
-    });
-
-    const repoArray = userRepoInformation.slice(0, 4);
-    setRepos(repoArray);
+      const repoArray = userRepoInformation.slice(0, 4);
+      setRepos(repoArray);
+    } else {
+      // TODO: Handle NOT FOUND
+    }
   };
 
   return (
     <>
-      <div className="App">
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="Profile Username">Username</label>
-          <br />
-          <input
-            type="text"
+      <div className="Header">
+        <Text h2>GITHUB PROFILE SEARCH</Text>
+        <form onSubmit={(e) => handleSubmit(e)} className="form">
+          <Input
             value={inputVal}
+            htmlType="text"
+            type=""
+            width="80%"
+            placeholder="Username"
             onChange={(e) => handleInputChange(e)}
           />
-          <button type="submit">Search</button>
+
+          <Spacer w={5} />
+          <Button type="success" htmlType="submit">
+            Search
+          </Button>
         </form>
       </div>
+
       {user && user.login ? (
-        <div>
-          <h3>Username: {user.login}</h3>
-          <h3>Bio: {user.bio}</h3>
-          <h3>Followers: {user.followers}</h3>
-          <h3>Following: {user.following}</h3>
-          <h3>Public Repos: {user.public_repos}</h3>
-          <img
-            width="100"
-            height="100"
-            alt="User Profile"
-            src={user.avatar_url}
-          />
-        </div>
+        <Card
+          style={{
+            backgroundColor: "#e3e3e3",
+            margin: "0% 15%",
+            fontSize: "2rem",
+          }}
+        >
+          <User className="profile-card" src={user.avatar_url} name={user.name}>
+            <User.Link href={user.html_url}>@{user.login}</User.Link>
+          </User>
+        </Card>
       ) : (
         <p></p>
       )}
       {repos && repos.length > 0 ? (
         <ul>
-          {repos.map((repo) => {
+          {/* {repos.map((repo) => {
             return (
               <li>
                 <a href={repo.html_url} key={repo.name}>
@@ -83,11 +93,13 @@ function App() {
                 </a>
               </li>
             );
-          })}
+          })} */}
         </ul>
       ) : (
         <p></p>
       )}
+
+      {/* TODO: ERROR HANDLING */}
     </>
   );
 }
