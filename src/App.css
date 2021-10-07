@@ -1,9 +1,11 @@
-.Header {
-  text-align: center;
-  padding: 1rem;
-  margin: auto;
-}
-
-.form {
-  margin: 1.5rem;
+#theme-btn {
+  position: absolute;
+  z-index: 10000;
+  height: 2em;
+  width: 2em;
+  bottom: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: chocolate;
 }

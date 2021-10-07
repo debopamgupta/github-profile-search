@@ -1,0 +1,13 @@
+.Header {
+  text-align: center;
+  padding: 1rem;
+  margin: auto;
+}
+
+.form {
+  margin: 1.5rem;
+}
+
+#repo-container {
+  padding: 1rem;
+}

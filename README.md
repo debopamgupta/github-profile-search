@@ -9,8 +9,10 @@ An example - https://github.com/GabrielNBDS/GitHub-Profiles
 - [x] User can enter a username
 - [x] User can click on search button to retrieve information
 - [x] User can see the avatar, username, followers and repository count of searched user
-- [ ] User can see the top 4 repositories of searched user
+- [x] User can see the top 4 repositories of searched user
 - [ ] User should get an alert if the username is not valid
+
+![](https://i.imgur.com/pF1zdYn.png)
 
 ## Getting Started with Create React App
 
